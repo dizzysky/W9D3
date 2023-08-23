@@ -8,9 +8,17 @@ async function customFetch(url, options = {}) {
 
     ...options.headers
   };
+  const response = await fetch(url, options)
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response;
+  }
 
-  return await fetch(url, options);
+
 }
+
+
 
 export function followUser(id) {
   return customFetch(`/users/${id}/follow`, {method: "POST"});
